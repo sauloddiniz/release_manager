@@ -41,7 +41,7 @@ public class ReleasePersistenceAdapter implements ReleasePersistencePort {
     @Override
     public Release findById(Long id) {
         ReleaseEntity entity = releaseRepository
-                .findById(id)
+                .findByIdAndDeletedAtIsNull(id)
                 .orElseThrow(() -> new ReleaseNotFoundException("Release not found with id: " + id));
         return ReleaseMapper.entityToRelease(entity);
     }

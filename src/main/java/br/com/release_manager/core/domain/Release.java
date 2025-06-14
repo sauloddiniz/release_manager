@@ -59,10 +59,14 @@ public class Release {
                 userUpdate);
     }
 
-    public Release updateRelease(String notes, String userUpdate) {
+    public void updateRelease(String notes, String userUpdate) {
         this.notes = notes;
         this.userUpdate = userUpdateValidate(userUpdate);
-        return this;
+    }
+
+    public void deleteRelease(String userUpdate) {
+        this.userUpdate = userUpdateValidate(userUpdate);
+        this.deletedAt = LocalDate.now().toString();
     }
 
     public Long getId() {
@@ -151,4 +155,5 @@ public class Release {
         }
         return userUpdate;
     }
+
 }

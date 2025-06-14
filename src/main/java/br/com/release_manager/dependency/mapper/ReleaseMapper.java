@@ -52,6 +52,7 @@ public class ReleaseMapper {
                 release.getCommits(),
                 release.getUser(),
                 release.getUserUpdate(),
-                release.getReleasedAt());
+                release.getReleasedAt(),
+                release.getDeletedAt());
     }
 }

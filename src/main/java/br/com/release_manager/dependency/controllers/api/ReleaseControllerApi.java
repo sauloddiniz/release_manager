@@ -49,8 +49,11 @@ public interface ReleaseControllerApi {
     ResponseEntity<ReleaseResponseDto> findReleaseById(@PathVariable("id") Long id);
 
     @PatchMapping("/{id}")
-    ResponseEntity<ReleaseResponseUpdateNoteDto> updateNotes(@PathVariable("id") Long id,
-                                                             @RequestBody ReleaseNotesRequestDto releaseNotesRequestDto);
+    ResponseEntity<ReleaseResponseMessageDto> updateNotes(@PathVariable("id") Long id,
+                                                          @RequestBody ReleaseNotesRequestDto releaseNotesRequestDto);
+
+    @DeleteMapping("/{id}")
+    ResponseEntity<ReleaseResponseMessageDto> deleteRelease(@PathVariable("id") Long id);
 
     @GetMapping()
     ResponseEntity<List<ReleaseResponseDto>> findAllAndPaginate(

@@ -11,5 +11,6 @@ public interface ReleaseUseCase {
     List<Release> findAllAndPaginate(final int page, final int totalPage);
     Long createRelease(ReleaseRequestDto releaseRequest);
     Release findById(Long id);
-    Release updateNote(Long id, ReleaseNotesRequestDto releaseNotesRequestDto);
+    void updateNote(Long id, ReleaseNotesRequestDto releaseNotesRequestDto);
+    void deleteRelease(Long id);
 }

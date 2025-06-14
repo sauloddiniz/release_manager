@@ -39,7 +39,7 @@ public class ReleaseEntity {
     public ReleaseEntity() {
     }
 
-    public ReleaseEntity(Long id, final String system, final String version, final String notes, final List<String> commits, final String user, final String userUpdate, String releasedAt) {
+    public ReleaseEntity(Long id, final String system, final String version, final String notes, final List<String> commits, final String user, final String userUpdate, String releasedAt, String deletedAt) {
         this.id = id;
         this.system = system;
         this.version = version;
@@ -48,6 +48,7 @@ public class ReleaseEntity {
         this.user = user;
         this.userUpdate = userUpdate;
         this.releasedAt = releasedAt;
+        this.deletedAt = deletedAt;
     }
 
     public Long getId() {

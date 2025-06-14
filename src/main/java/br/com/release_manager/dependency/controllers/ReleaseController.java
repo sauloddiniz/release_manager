@@ -48,9 +48,15 @@ public class ReleaseController implements ReleaseControllerApi {
     }
 
     @Override
-    public ResponseEntity<ReleaseResponseUpdateNoteDto> updateNotes(Long id, ReleaseNotesRequestDto releaseNotesRequestDto) {
+    public ResponseEntity<ReleaseResponseMessageDto> updateNotes(Long id, ReleaseNotesRequestDto releaseNotesRequestDto) {
         releaseUseCase.updateNote(id, releaseNotesRequestDto);
-        return ResponseEntity.ok().body(new ReleaseResponseUpdateNoteDto("Release atualizado com sucesso."));
+        return ResponseEntity.ok().body(new ReleaseResponseMessageDto("Release atualizado com sucesso."));
+    }
+
+    @Override
+    public ResponseEntity<ReleaseResponseMessageDto> deleteRelease(Long id) {
+        releaseUseCase.deleteRelease(id);
+        return ResponseEntity.ok().body(new ReleaseResponseMessageDto("Release deletado com sucesso."));
     }
 
     @Override

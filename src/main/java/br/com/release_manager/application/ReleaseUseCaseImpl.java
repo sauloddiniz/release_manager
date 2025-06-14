@@ -39,11 +39,18 @@ public class ReleaseUseCaseImpl implements ReleaseUseCase {
 
     @Override
     @Transactional
-    public Release updateNote(Long id, ReleaseNotesRequestDto releaseNotesRequestDto) {
+    public void updateNote(Long id, ReleaseNotesRequestDto releaseNotesRequestDto) {
         Release release = releasePersistencePort.findById(id);
         release.updateRelease(releaseNotesRequestDto.notes(), "userUpdate");
-        release = releasePersistencePort.save(release);
-        return release;
+        releasePersistencePort.save(release);
+    }
+
+    @Override
+    @Transactional
+    public void deleteRelease(Long id) {
+        Release release = releasePersistencePort.findById(id);
+        release.deleteRelease("userUpdate");
+        releasePersistencePort.save(release);
     }
 
     @Override
