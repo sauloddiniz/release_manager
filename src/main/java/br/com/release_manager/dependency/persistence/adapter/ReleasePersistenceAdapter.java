@@ -1,6 +1,7 @@
 package br.com.release_manager.dependency.persistence.adapter;
 
 import br.com.release_manager.core.domain.Release;
+import br.com.release_manager.core.exception.ReleaseNotFoundException;
 import br.com.release_manager.dependency.mapper.ReleaseMapper;
 import br.com.release_manager.dependency.persistence.ReleasePersistencePort;
 import br.com.release_manager.dependency.persistence.entity.ReleaseEntity;
@@ -34,6 +35,14 @@ public class ReleasePersistenceAdapter implements ReleasePersistencePort {
     public Release save(Release release) {
         ReleaseEntity entity = ReleaseMapper.releaseToEntity(release);
         entity = releaseRepository.save(entity);
+        return ReleaseMapper.entityToRelease(entity);
+    }
+
+    @Override
+    public Release findById(Long id) {
+        ReleaseEntity entity = releaseRepository
+                .findById(id)
+                .orElseThrow(() -> new ReleaseNotFoundException("Release not found with id: " + id));
         return ReleaseMapper.entityToRelease(entity);
     }
 }

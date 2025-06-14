@@ -9,4 +9,5 @@ import java.util.List;
 public interface ReleaseUseCase {
     List<Release> findAllAndPaginate(final int page, final int totalPage);
     Long createRelease(ReleaseRequestDto releaseRequest);
+    Release findById(Long id);
 }

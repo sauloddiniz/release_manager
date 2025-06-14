@@ -3,6 +3,7 @@ package br.com.release_manager.dependency.controllers.api;
 import br.com.release_manager.dependency.dto.ReleaseListResponseDto;
 import br.com.release_manager.dependency.dto.ReleaseRequestDto;
 import br.com.release_manager.dependency.dto.ReleaseResponseCreateDto;
+import br.com.release_manager.dependency.dto.ReleaseResponseDto;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -45,8 +46,11 @@ public interface ReleaseControllerApi {
     @PostMapping
     ResponseEntity<ReleaseResponseCreateDto> saveRelease(@RequestBody ReleaseRequestDto releaseRequest);
 
+    @GetMapping("/{id}")
+    ResponseEntity<ReleaseResponseDto> findReleaseById(@PathVariable("id") Long id);
+
     @GetMapping("/all")
     ResponseEntity<ReleaseListResponseDto> findAllAndPaginate(
-            @RequestParam(value = "page", defaultValue = "0", required = false) int page,
+            @RequestParam(value = "page", defaultValue = "1", required = false) int page,
             @RequestParam(value = "total_page", defaultValue = "50", required = false)  int totalPage);
 }
