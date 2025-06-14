@@ -1,6 +1,7 @@
 package br.com.release_manager.config;
 
 import br.com.release_manager.core.exception.ReleaseCreateException;
+import br.com.release_manager.core.exception.ReleaseNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,7 +16,13 @@ import java.util.Map;
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(ReleaseCreateException.class)
-    public ResponseEntity<Map<String, Object>> handleProductNotFoundException(ReleaseCreateException ex, HttpServletRequest request) {
+    public ResponseEntity<Map<String, Object>> handleReleaseCreate(ReleaseCreateException ex, HttpServletRequest request) {
+        Map<String, Object> body = extractErrorInfo(ex, request);
+        return new ResponseEntity<>(body, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(ReleaseNotFoundException.class)
+    public ResponseEntity<Map<String, Object>> handleReleaseNoFound(ReleaseNotFoundException ex, HttpServletRequest request) {
         Map<String, Object> body = extractErrorInfo(ex, request);
         return new ResponseEntity<>(body, HttpStatus.NOT_FOUND);
     }

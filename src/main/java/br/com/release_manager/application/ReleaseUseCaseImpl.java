@@ -2,8 +2,10 @@ package br.com.release_manager.application;
 
 import br.com.release_manager.core.domain.Release;
 import br.com.release_manager.core.exception.ReleaseCreateException;
+import br.com.release_manager.dependency.dto.ReleaseNotesRequestDto;
 import br.com.release_manager.dependency.dto.ReleaseRequestDto;
 import br.com.release_manager.dependency.persistence.ReleasePersistencePort;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -32,7 +34,16 @@ public class ReleaseUseCaseImpl implements ReleaseUseCase {
     @Override
     public Release findById(Long id) {
         Release release = releasePersistencePort.findById(id);
-        return null;
+        return release;
+    }
+
+    @Override
+    @Transactional
+    public Release updateNote(Long id, ReleaseNotesRequestDto releaseNotesRequestDto) {
+        Release release = releasePersistencePort.findById(id);
+        release.updateRelease(releaseNotesRequestDto.notes(), "userUpdate");
+        release = releasePersistencePort.save(release);
+        return release;
     }
 
     @Override

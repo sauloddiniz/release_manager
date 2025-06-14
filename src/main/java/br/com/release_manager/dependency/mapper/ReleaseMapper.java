@@ -8,11 +8,12 @@ public class ReleaseMapper {
     private ReleaseMapper() {
     }
 
-    public static ReleaseResponseDto releaseToResponseDto(Release release) {
+    public static ReleaseResponseDto releaseToResponse(Release release) {
         if (release == null) {
             return null;
         }
         return new ReleaseResponseDto(
+                "Release listado com sucesso.",
                 release.getId(),
                 release.getSystem(),
                 release.getVersion(),
@@ -40,7 +41,11 @@ public class ReleaseMapper {
     }
 
     public static ReleaseEntity releaseToEntity(Release release) {
+        if (release == null) {
+            return null;
+        }
         return new ReleaseEntity(
+                release.getId(),
                 release.getSystem(),
                 release.getVersion(),
                 release.getNotes(),

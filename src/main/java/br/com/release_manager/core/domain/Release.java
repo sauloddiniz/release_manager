@@ -59,6 +59,12 @@ public class Release {
                 userUpdate);
     }
 
+    public Release updateRelease(String notes, String userUpdate) {
+        this.notes = notes;
+        this.userUpdate = userUpdateValidate(userUpdate);
+        return this;
+    }
+
     public Long getId() {
         return id;
     }
@@ -93,6 +99,14 @@ public class Release {
 
     public String getDeletedAt() {
         return deletedAt;
+    }
+
+    public void setNotes(String notes) {
+        this.notes = notes;
+    }
+
+    public void setUserUpdate(String userUpdate) {
+        this.userUpdate = userUpdate;
     }
 
     public List<String> getErrors() {

@@ -1,9 +1,6 @@
 package br.com.release_manager.dependency.controllers.api;
 
-import br.com.release_manager.dependency.dto.ReleaseListResponseDto;
-import br.com.release_manager.dependency.dto.ReleaseRequestDto;
-import br.com.release_manager.dependency.dto.ReleaseResponseCreateDto;
-import br.com.release_manager.dependency.dto.ReleaseResponseDto;
+import br.com.release_manager.dependency.dto.*;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -12,8 +9,10 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Tag(name = "Releases", description = "Operações para gerenciamento de releases")
-@RequestMapping("/release")
+@RequestMapping("/releases")
 public interface ReleaseControllerApi {
 
     @Operation(
@@ -49,8 +48,12 @@ public interface ReleaseControllerApi {
     @GetMapping("/{id}")
     ResponseEntity<ReleaseResponseDto> findReleaseById(@PathVariable("id") Long id);
 
-    @GetMapping("/all")
-    ResponseEntity<ReleaseListResponseDto> findAllAndPaginate(
-            @RequestParam(value = "page", defaultValue = "1", required = false) int page,
+    @PatchMapping("/{id}")
+    ResponseEntity<ReleaseResponseUpdateNoteDto> updateNotes(@PathVariable("id") Long id,
+                                                             @RequestBody ReleaseNotesRequestDto releaseNotesRequestDto);
+
+    @GetMapping()
+    ResponseEntity<List<ReleaseResponseDto>> findAllAndPaginate(
+            @RequestParam(value = "page", defaultValue = "0", required = false) int page,
             @RequestParam(value = "total_page", defaultValue = "50", required = false)  int totalPage);
 }

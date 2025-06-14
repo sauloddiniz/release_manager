@@ -3,10 +3,7 @@ package br.com.release_manager.dependency.controllers;
 import br.com.release_manager.application.ReleaseUseCase;
 import br.com.release_manager.core.domain.Release;
 import br.com.release_manager.dependency.controllers.api.ReleaseControllerApi;
-import br.com.release_manager.dependency.dto.ReleaseListResponseDto;
-import br.com.release_manager.dependency.dto.ReleaseRequestDto;
-import br.com.release_manager.dependency.dto.ReleaseResponseCreateDto;
-import br.com.release_manager.dependency.dto.ReleaseResponseDto;
+import br.com.release_manager.dependency.dto.*;
 import br.com.release_manager.dependency.mapper.ReleaseMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -47,21 +44,25 @@ public class ReleaseController implements ReleaseControllerApi {
     @Override
     public ResponseEntity<ReleaseResponseDto> findReleaseById(Long id) {
         Release release = releaseUseCase.findById(id);
-        return null;
+        return ResponseEntity.ok(ReleaseMapper.releaseToResponse(release));
     }
 
     @Override
-    public ResponseEntity<ReleaseListResponseDto> findAllAndPaginate(int page, int totalPage) {
+    public ResponseEntity<ReleaseResponseUpdateNoteDto> updateNotes(Long id, ReleaseNotesRequestDto releaseNotesRequestDto) {
+        releaseUseCase.updateNote(id, releaseNotesRequestDto);
+        return ResponseEntity.ok().body(new ReleaseResponseUpdateNoteDto("Release atualizado com sucesso."));
+    }
+
+    @Override
+    public ResponseEntity<List<ReleaseResponseDto>> findAllAndPaginate(int page, int totalPage) {
         log.info("Buscando releases com paginação - Página: {}, Total por página: {}", page, totalPage);
 
         List<ReleaseResponseDto> listRelease = releaseUseCase.findAllAndPaginate(page, totalPage)
                 .stream()
-                .map(ReleaseMapper::releaseToResponseDto)
+                .map(ReleaseMapper::releaseToResponse)
                 .toList();
 
-        ReleaseListResponseDto response = new ReleaseListResponseDto("Releases listados com sucesso.", listRelease);
-
-        return ResponseEntity.ok(response);
+        return ResponseEntity.ok(listRelease);
     }
 
 }
