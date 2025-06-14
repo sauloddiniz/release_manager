@@ -38,7 +38,8 @@ public record ReleaseRequestDto(
         example = "Inclui melhorias de performance e correções de bugs.",
         required = false
     )
-    String notes
+    String notes,
+    String user
 
 ) {
 }

@@ -1,5 +1,8 @@
 package br.com.release_manager.core.domain;
 
+import br.com.release_manager.dependency.dto.ReleaseRequestDto;
+
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,7 +25,29 @@ public class Release {
         this.commits = commits;
         this.user = userValidate(user);
         this.userUpdate = userUpdateValidate(userUpdate);
+        this.releasedAt = LocalDate.now().toString();
         validateListErrors();
+    }
+
+    public Release(Long id, String system, String version, String notes, List<String> commits, String user, String userUpdate, String releasedAt) {
+        this.id = id;
+        this.system = system;
+        this.version = version;
+        this.notes = notes;
+        this.commits = commits;
+        this.user = user;
+        this.userUpdate = userUpdate;
+        this.releasedAt = releasedAt;
+    }
+
+    public static Release create(ReleaseRequestDto releaseRequest, String userUpdate) {
+        return new Release(
+                releaseRequest.system(),
+                releaseRequest.version(),
+                releaseRequest.notes(),
+                releaseRequest.commits(),
+                releaseRequest.user(),
+                userUpdate);
     }
 
     public Long getId() {

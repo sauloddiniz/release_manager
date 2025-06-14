@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "RELEASE", schema = "RELEASE_MANAGER")
+@Table(name = "RELEASE", schema = "MANAGER")
 public class ReleaseEntity {
 
     @Id
@@ -39,13 +39,14 @@ public class ReleaseEntity {
     public ReleaseEntity() {
     }
 
-    public ReleaseEntity(final String system, final String version, final String notes, final List<String> commits, final String user, final String userUpdate) {
+    public ReleaseEntity(final String system, final String version, final String notes, final List<String> commits, final String user, final String userUpdate, String releasedAt) {
         this.system = system;
         this.version = version;
         this.notes = notes;
         this.commits = commits;
         this.user = user;
         this.userUpdate = userUpdate;
+        this.releasedAt = releasedAt;
     }
 
     public Long getId() {

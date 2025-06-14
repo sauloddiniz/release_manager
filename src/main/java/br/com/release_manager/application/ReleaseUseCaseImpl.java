@@ -1,6 +1,7 @@
 package br.com.release_manager.application;
 
 import br.com.release_manager.core.domain.Release;
+import br.com.release_manager.dependency.dto.ReleaseRequestDto;
 import br.com.release_manager.dependency.persistence.ReleasePersistencePort;
 import org.springframework.stereotype.Service;
 
@@ -16,7 +17,20 @@ public class ReleaseUseCaseImpl implements ReleaseUseCase {
     }
 
     @Override
-    public List<Release> findAllAndPaginate(int page, int totalPage) {
-        return List.of();
+    public Long createRelease(ReleaseRequestDto releaseRequest) {
+        try {
+            Release release = Release.create(releaseRequest, "userUpdatte");
+            release = releasePersistencePort.save(release);
+            return release.getId();
+        } catch (Exception e) {
+            throw e;
+        }
     }
+
+    @Override
+    public List<Release> findAllAndPaginate(int page, int totalPage) {
+        List<Release> releases = releasePersistencePort.findAll(page, totalPage);
+        return releases;
+    }
+
 }
