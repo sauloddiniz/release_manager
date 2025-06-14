@@ -25,6 +25,42 @@ public class Release {
         validateListErrors();
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public String getSystem() {
+        return system;
+    }
+
+    public String getVersion() {
+        return version;
+    }
+
+    public String getNotes() {
+        return notes;
+    }
+
+    public List<String> getCommits() {
+        return commits;
+    }
+
+    public String getUser() {
+        return user;
+    }
+
+    public String getUserUpdate() {
+        return userUpdate;
+    }
+
+    public String getReleasedAt() {
+        return releasedAt;
+    }
+
+    public String getDeletedAt() {
+        return deletedAt;
+    }
+
     private void validateListErrors() {
         if (!errors.isEmpty()) {
             throw new IllegalArgumentException(errors.toString());
