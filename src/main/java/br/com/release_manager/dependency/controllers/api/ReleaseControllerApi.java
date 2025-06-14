@@ -46,8 +46,7 @@ public interface ReleaseControllerApi {
         }
     )
     @PostMapping
-    ResponseEntity<ReleaseResponseCreateDto> saveRelease(@RequestBody ReleaseRequestDto releaseRequest,
-                                                         @CookieValue(value = "jwt", required = false) String jwt);
+    ResponseEntity<ReleaseResponseCreateDto> saveRelease(@RequestBody ReleaseRequestDto releaseRequest);
 
     @Operation(
         summary = "Consulta uma release pelo ID",
@@ -99,8 +98,7 @@ public interface ReleaseControllerApi {
     )
     @PatchMapping("/{id}")
     ResponseEntity<ReleaseResponseMessageDto> updateNotes(@PathVariable("id") Long id,
-                                                          @RequestBody ReleaseNotesRequestDto releaseNotesRequestDto,
-                                                          @CookieValue(value = "jwt", required = false) String jwt);
+                                                          @RequestBody ReleaseNotesRequestDto releaseNotesRequestDto);
 
     @Operation(
         summary = "Exclui uma release",
@@ -121,8 +119,7 @@ public interface ReleaseControllerApi {
         }
     )
     @DeleteMapping("/{id}")
-    ResponseEntity<ReleaseResponseMessageDto> deleteRelease(@PathVariable("id") Long id,
-                                                            @CookieValue(value = "jwt", required = false) String jwt);
+    ResponseEntity<ReleaseResponseMessageDto> deleteRelease(@PathVariable("id") Long id);
 
     @Operation(
         summary = "Lista todas as releases com paginação",

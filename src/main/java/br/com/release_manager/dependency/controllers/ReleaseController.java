@@ -26,13 +26,12 @@ public class ReleaseController implements ReleaseControllerApi {
     }
 
     @Override
-    public ResponseEntity<ReleaseResponseCreateDto> saveRelease(ReleaseRequestDto releaseRequest,
-                                                                String jwt) {
+    public ResponseEntity<ReleaseResponseCreateDto> saveRelease(ReleaseRequestDto releaseRequest) {
 
         log.info("Iniciando criação de nova release para o sistema: {} versão: {}",
                 releaseRequest.system(), releaseRequest.version());
 
-        Long idReleaseCreated = releaseUseCase.createRelease(releaseRequest, jwt);
+        Long idReleaseCreated = releaseUseCase.createRelease(releaseRequest);
 
         final URI uri = ServletUriComponentsBuilder
                 .fromCurrentRequest()
@@ -51,15 +50,14 @@ public class ReleaseController implements ReleaseControllerApi {
 
     @Override
     public ResponseEntity<ReleaseResponseMessageDto> updateNotes(Long id,
-                                                                 ReleaseNotesRequestDto releaseNotesRequestDto,
-                                                                 String jwt) {
-        releaseUseCase.updateNote(id, releaseNotesRequestDto, jwt);
+                                                                 ReleaseNotesRequestDto releaseNotesRequestDto) {
+        releaseUseCase.updateNote(id, releaseNotesRequestDto);
         return ResponseEntity.ok().body(new ReleaseResponseMessageDto("Release atualizado com sucesso."));
     }
 
     @Override
-    public ResponseEntity<ReleaseResponseMessageDto> deleteRelease(Long id,String jwt) {
-        releaseUseCase.deleteRelease(id, jwt);
+    public ResponseEntity<ReleaseResponseMessageDto> deleteRelease(Long id) {
+        releaseUseCase.deleteRelease(id);
         return ResponseEntity.ok().body(new ReleaseResponseMessageDto("Release deletado com sucesso."));
     }
 

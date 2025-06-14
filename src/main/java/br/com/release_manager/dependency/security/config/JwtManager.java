@@ -1,6 +1,5 @@
 package br.com.release_manager.dependency.security.config;
 
-import br.com.release_manager.dependency.security.JwtManagerPort;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
@@ -32,6 +31,7 @@ public class JwtManager {
 
     public boolean validJwt(String token) {
         try {
+            token = token.substring(7);
             JWT.require(Algorithm.HMAC256(secretKey))
                     .build()
                     .verify(token);
@@ -46,7 +46,8 @@ public class JwtManager {
         return decodedJWT.getClaim(NAME).asString();
     }
 
-    private DecodedJWT decode(String token) {;
+    private DecodedJWT decode(String token) {
+        token = token.substring(7);
         return JWT.decode(token);
     }
 

@@ -9,7 +9,7 @@ import java.util.List;
 public interface ReleaseUseCase {
     List<Release> findAllAndPaginate(final int page, final int totalPage);
     Release findById(Long id);
-    Long createRelease(ReleaseRequestDto releaseRequest, String jwt);
-    void updateNote(Long id, ReleaseNotesRequestDto releaseNotesRequestDto, String jwt);
-    void deleteRelease(Long id, String jwt);
+    Long createRelease(ReleaseRequestDto releaseRequest);
+    void updateNote(Long id, ReleaseNotesRequestDto releaseNotesRequestDto);
+    void deleteRelease(Long id);
 }
