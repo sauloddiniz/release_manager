@@ -8,6 +8,7 @@ import br.com.release_manager.dependency.mapper.ReleaseMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -25,12 +26,13 @@ public class ReleaseController implements ReleaseControllerApi {
     }
 
     @Override
-    public ResponseEntity<ReleaseResponseCreateDto> saveRelease(ReleaseRequestDto releaseRequest) {
+    public ResponseEntity<ReleaseResponseCreateDto> saveRelease(ReleaseRequestDto releaseRequest,
+                                                                String jwt) {
 
         log.info("Iniciando criação de nova release para o sistema: {} versão: {}",
                 releaseRequest.system(), releaseRequest.version());
 
-        Long idReleaseCreated = releaseUseCase.createRelease(releaseRequest);
+        Long idReleaseCreated = releaseUseCase.createRelease(releaseRequest, jwt);
 
         final URI uri = ServletUriComponentsBuilder
                 .fromCurrentRequest()
@@ -48,14 +50,16 @@ public class ReleaseController implements ReleaseControllerApi {
     }
 
     @Override
-    public ResponseEntity<ReleaseResponseMessageDto> updateNotes(Long id, ReleaseNotesRequestDto releaseNotesRequestDto) {
-        releaseUseCase.updateNote(id, releaseNotesRequestDto);
+    public ResponseEntity<ReleaseResponseMessageDto> updateNotes(Long id,
+                                                                 ReleaseNotesRequestDto releaseNotesRequestDto,
+                                                                 String jwt) {
+        releaseUseCase.updateNote(id, releaseNotesRequestDto, jwt);
         return ResponseEntity.ok().body(new ReleaseResponseMessageDto("Release atualizado com sucesso."));
     }
 
     @Override
-    public ResponseEntity<ReleaseResponseMessageDto> deleteRelease(Long id) {
-        releaseUseCase.deleteRelease(id);
+    public ResponseEntity<ReleaseResponseMessageDto> deleteRelease(Long id,String jwt) {
+        releaseUseCase.deleteRelease(id, jwt);
         return ResponseEntity.ok().body(new ReleaseResponseMessageDto("Release deletado com sucesso."));
     }
 

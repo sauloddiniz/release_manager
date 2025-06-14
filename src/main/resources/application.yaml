@@ -1,4 +1,19 @@
+server:
+  port: 8080
+  servlet:
+    context-path: "/release-manager"
+
+jwt:
+  secret: "my secret is secret"
+
 spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          github:
+            client-id: "Ov23lifyjRB2FboNGWPC"
+            client-secret: "87b81a3019f0ba30849f05ef9650929687b4b8f3"
   datasource:
     url: jdbc:h2:mem:releasemanagerDb
     driver-class-name: org.h2.Driver
