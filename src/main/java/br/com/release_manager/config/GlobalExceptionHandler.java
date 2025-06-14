@@ -18,7 +18,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(ReleaseCreateException.class)
     public ResponseEntity<Map<String, Object>> handleReleaseCreate(ReleaseCreateException ex, HttpServletRequest request) {
         Map<String, Object> body = extractErrorInfo(ex, request);
-        return new ResponseEntity<>(body, HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(ReleaseNotFoundException.class)
