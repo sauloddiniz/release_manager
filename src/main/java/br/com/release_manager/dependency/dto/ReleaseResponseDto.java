@@ -3,6 +3,8 @@ package br.com.release_manager.dependency.dto;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -16,5 +18,5 @@ public record ReleaseResponseDto(
         String notes,
         String user,
         String userUpdate,
-        String releaseAt) {
+        LocalDateTime releaseAt) {
 }

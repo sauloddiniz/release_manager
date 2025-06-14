@@ -4,6 +4,7 @@ import br.com.release_manager.core.exception.ReleaseCreateException;
 import br.com.release_manager.dependency.dto.ReleaseRequestDto;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -16,18 +17,18 @@ public class Release {
     private List<String> commits;
     private String user;
     private String userUpdate;
-    private String releasedAt;
-    private String deletedAt;
+    private LocalDateTime releasedAt;
+    private LocalDateTime deletedAt;
     private List<String> errors = new ArrayList<>();
 
     public Release(final String system, final String version, final String notes, final List<String> commits, final String user, final String userUpdate) {
         this.system = systemValidate(system);
         this.version = versionValidate(version);
         this.notes = notes;
-        this.commits = commits;
+        this.commits = commitsValidate(commits);
         this.user = userValidate(user);
         this.userUpdate = userUpdateValidate(userUpdate);
-        this.releasedAt = LocalDate.now().toString();
+        this.releasedAt = LocalDateTime.now();
         executeTrimOnSystem();
         validateListErrors();
     }
@@ -38,7 +39,7 @@ public class Release {
         }
     }
 
-    public Release(Long id, String system, String version, String notes, List<String> commits, String user, String userUpdate, String releasedAt) {
+    public Release(Long id, String system, String version, String notes, List<String> commits, String user, String userUpdate, LocalDateTime releasedAt) {
         this.id = id;
         this.system = system;
         this.version = version;
@@ -62,11 +63,13 @@ public class Release {
     public void updateRelease(String notes, String userUpdate) {
         this.notes = notes;
         this.userUpdate = userUpdateValidate(userUpdate);
+        validateListErrors();
     }
 
     public void deleteRelease(String userUpdate) {
         this.userUpdate = userUpdateValidate(userUpdate);
-        this.deletedAt = LocalDate.now().toString();
+        this.deletedAt = LocalDateTime.now();
+        validateListErrors();
     }
 
     public Long getId() {
@@ -97,24 +100,12 @@ public class Release {
         return userUpdate;
     }
 
-    public String getReleasedAt() {
+    public LocalDateTime getReleasedAt() {
         return releasedAt;
     }
 
-    public String getDeletedAt() {
+    public LocalDateTime getDeletedAt() {
         return deletedAt;
-    }
-
-    public void setNotes(String notes) {
-        this.notes = notes;
-    }
-
-    public void setUserUpdate(String userUpdate) {
-        this.userUpdate = userUpdate;
-    }
-
-    public List<String> getErrors() {
-        return errors;
     }
 
     private void validateListErrors() {
@@ -146,6 +137,13 @@ public class Release {
             errors.add("The 'user' field is required.");
         }
         return user;
+    }
+
+    private List<String> commitsValidate(List<String> commits) {
+        if (Objects.isNull(commits) || commits.isEmpty()) {
+            errors.add("The 'commits' field is required.");
+        }
+        return commits;
     }
 
     //TODO lembrar de extrair do token

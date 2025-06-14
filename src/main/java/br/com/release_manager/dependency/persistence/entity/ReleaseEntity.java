@@ -2,6 +2,8 @@ package br.com.release_manager.dependency.persistence.entity;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -31,15 +33,15 @@ public class ReleaseEntity {
     private String userUpdate;
 
     @Column(name = "RELEASED_AT")
-    private String releasedAt;
+    private LocalDateTime releasedAt;
 
     @Column(name = "DELETED_AT")
-    private String deletedAt;
+    private LocalDateTime deletedAt;
 
     public ReleaseEntity() {
     }
 
-    public ReleaseEntity(Long id, final String system, final String version, final String notes, final List<String> commits, final String user, final String userUpdate, String releasedAt, String deletedAt) {
+    public ReleaseEntity(Long id, final String system, final String version, final String notes, final List<String> commits, final String user, final String userUpdate, LocalDateTime releasedAt, LocalDateTime deletedAt) {
         this.id = id;
         this.system = system;
         this.version = version;
@@ -107,19 +109,19 @@ public class ReleaseEntity {
         this.userUpdate = userUpdate;
     }
 
-    public String getReleasedAt() {
+    public LocalDateTime getReleasedAt() {
         return releasedAt;
     }
 
-    public void setReleasedAt(String releasedAt) {
+    public void setReleasedAt(LocalDateTime releasedAt) {
         this.releasedAt = releasedAt;
     }
 
-    public String getDeletedAt() {
+    public LocalDateTime getDeletedAt() {
         return deletedAt;
     }
 
-    public void setDeletedAt(String deletedAt) {
+    public void setDeletedAt(LocalDateTime deletedAt) {
         this.deletedAt = deletedAt;
     }
 }
