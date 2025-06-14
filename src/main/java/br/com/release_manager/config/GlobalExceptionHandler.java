@@ -1,7 +1,8 @@
 package br.com.release_manager.config;
 
-import br.com.release_manager.core.exception.ReleaseCreateException;
-import br.com.release_manager.core.exception.ReleaseNotFoundException;
+import br.com.release_manager.core.exceptions.JwtAuthenticationException;
+import br.com.release_manager.core.exceptions.ReleaseCreateException;
+import br.com.release_manager.core.exceptions.ReleaseNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,6 +26,12 @@ public class GlobalExceptionHandler {
     public ResponseEntity<Map<String, Object>> handleReleaseNoFound(ReleaseNotFoundException ex, HttpServletRequest request) {
         Map<String, Object> body = extractErrorInfo(ex, request);
         return new ResponseEntity<>(body, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(JwtAuthenticationException.class)
+    public ResponseEntity<Object> jwtAuthenticationException(JwtAuthenticationException ex, HttpServletRequest request) {
+        Map<String, Object> body = extractErrorInfo(ex, request);
+        return new ResponseEntity<>(body, HttpStatus.UNAUTHORIZED);
     }
 
     private static Map<String, Object> extractErrorInfo(Exception ex, HttpServletRequest request) {

@@ -1,7 +1,7 @@
 package br.com.release_manager.dependency.persistence.adapter;
 
 import br.com.release_manager.core.domain.Release;
-import br.com.release_manager.core.exception.ReleaseNotFoundException;
+import br.com.release_manager.core.exceptions.ReleaseNotFoundException;
 import br.com.release_manager.dependency.mapper.ReleaseMapper;
 import br.com.release_manager.dependency.persistence.ReleasePersistencePort;
 import br.com.release_manager.dependency.persistence.entity.ReleaseEntity;
@@ -13,7 +13,6 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
-import java.util.Optional;
 
 @Component
 public class ReleasePersistenceAdapter implements ReleasePersistencePort {

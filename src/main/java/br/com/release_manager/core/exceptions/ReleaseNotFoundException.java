@@ -1,4 +1,4 @@
-package br.com.release_manager.core.exception;
+package br.com.release_manager.core.exceptions;
 
 public class ReleaseNotFoundException extends RuntimeException {
 

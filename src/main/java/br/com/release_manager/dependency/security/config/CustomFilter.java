@@ -1,6 +1,6 @@
 package br.com.release_manager.dependency.security.config;
 
-import com.auth0.jwt.exceptions.JWTVerificationException;
+import br.com.release_manager.core.exceptions.JwtAuthenticationException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -44,7 +44,7 @@ public class CustomFilter extends OncePerRequestFilter {
         try {
             String token = request.getHeader("Authorization");
             if (token == null || !jwtManager.validJwt(token)) {
-                throw new JWTVerificationException("Invalid JWT");
+                throw new JwtAuthenticationException("Invalid JWT");
             }
 
             UsernamePasswordAuthenticationToken authentication =

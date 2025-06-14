@@ -1,9 +1,8 @@
 package br.com.release_manager.core.domain;
 
-import br.com.release_manager.core.exception.ReleaseCreateException;
+import br.com.release_manager.core.exceptions.ReleaseCreateException;
 import br.com.release_manager.dependency.dto.ReleaseRequestDto;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
