@@ -35,7 +35,7 @@ Antes de começar, certifique-se de que o ambiente possui todas as ferramentas a
    ```
 
 Após rodar o comando acima, o Maven irá resolver e baixar automaticamente todas as dependências necessárias.  
-A aplicação estará disponível localmente, normalmente na porta **8080** (ou conforme configurado no seu `application.properties`).
+A aplicação estará disponível localmente, na porta **8080**.
 
 
 ### Executando via Docker Compose (dependência do Docker)
