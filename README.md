@@ -1,6 +1,6 @@
 # Release Manager API
 
-**Release Manager API** tem como principal objetivo gerenciar e registrar informações sobre releases de sistemas. Por meio de endpoints seguros e autenticados via **OAuth** e **JWT**, a aplicação permite o cadastro, consulta e atualização de releases, salvando os dados no banco conforme regras de negócio definidas.
+**Release Manager API** tem como principal objetivo gerenciar e registrar informações sobre releases. Por meio de endpoints seguros e autenticados via **OAuth** e **JWT**, a aplicação permite o cadastro, consulta e atualização de releases, salvando os dados no banco conforme regras de negócio definidas.
 
 ---
 
@@ -12,7 +12,7 @@ Antes de começar, certifique-se de que o ambiente possui todas as ferramentas a
 
 - **Java 21**: Certifique-se de ter o JDK (Java Development Kit) 21. <a href="https://openjdk.org/install/" target="_blank">Guia de instalação</a>.
 - **Maven**: Necessário para gerenciamento de dependências e configuração do projeto. <a href="https://maven.apache.org/install.html" target="_blank">Guia de instalação do Maven</a>.
-- **Docker e Docker Compose**: Utilizados para executar a aplicação em conjunto com suas dependências, como o banco de dados PostgreSQL. <a href="https://docs.docker.com/get-docker/" target="_blank">Guia de instalação do Docker</a>.
+- **Docker e Docker Compose**: Utilizados para executar a aplicação em conjunto com suas dependências. <a href="https://docs.docker.com/get-docker/" target="_blank">Guia de instalação do Docker</a>.
 - **Banco de Dados H2**: O projeto utiliza o banco de dados H2 em memória para facilitar ambientes de desenvolvimento e testes. Não é necessário instalar nada manualmente, pois o H2 é iniciado automaticamente junto com a aplicação.  
   <a href="https://www.h2database.com/html/main.html" target="_blank">Saiba mais sobre o H2 Database</a>.
 ---
@@ -44,10 +44,10 @@ Com esse modo de execução, não é necessário se preocupar com instalações 
 
 1. Certifique-se de ter o Docker e o Docker Compose instalados em sua máquina.
 
-2. Execute o comando abaixo para iniciar todos os serviços definidos no arquivo `docker-compose.yaml`:
+2. Execute o comando abaixo estando na raiz do projeto, para iniciar todos os serviços definidos no arquivo `docker-compose.yaml`:
    ```bash
     docker-compose up
-   > ```
+    ```
 
 3. Para parar os containers, utilize:
    ```bash
