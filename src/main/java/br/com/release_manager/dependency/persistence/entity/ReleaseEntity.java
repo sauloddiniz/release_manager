@@ -2,7 +2,6 @@ package br.com.release_manager.dependency.persistence.entity;
 
 import jakarta.persistence.*;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -23,16 +22,16 @@ public class ReleaseEntity {
     @Column(name = "NOTES")
     private String notes;
 
-    @Column(name = "COMMITS")
+    @Column(name = "COMMITS", nullable = false)
     private List<String> commits;
 
-    @Column(name = "\"USER\"")
+    @Column(name = "\"USER\"", nullable = false)
     private String user;
 
     @Column(name = "USER_UPDATE", nullable = false)
     private String userUpdate;
 
-    @Column(name = "RELEASED_AT")
+    @Column(name = "RELEASED_AT", nullable = false)
     private LocalDateTime releasedAt;
 
     @Column(name = "DELETED_AT")
@@ -65,10 +64,6 @@ public class ReleaseEntity {
         return system;
     }
 
-    public void setSystem(String system) {
-        this.system = system;
-    }
-
     public String getVersion() {
         return version;
     }
@@ -81,47 +76,24 @@ public class ReleaseEntity {
         return notes;
     }
 
-    public void setNotes(String notes) {
-        this.notes = notes;
-    }
-
     public List<String> getCommits() {
         return commits;
-    }
-
-    public void setCommits(List<String> commits) {
-        this.commits = commits;
     }
 
     public String getUser() {
         return user;
     }
 
-    public void setUser(String user) {
-        this.user = user;
-    }
-
     public String getUserUpdate() {
         return userUpdate;
-    }
-
-    public void setUserUpdate(String userUpdate) {
-        this.userUpdate = userUpdate;
     }
 
     public LocalDateTime getReleasedAt() {
         return releasedAt;
     }
 
-    public void setReleasedAt(LocalDateTime releasedAt) {
-        this.releasedAt = releasedAt;
-    }
-
     public LocalDateTime getDeletedAt() {
         return deletedAt;
     }
 
-    public void setDeletedAt(LocalDateTime deletedAt) {
-        this.deletedAt = deletedAt;
-    }
 }
