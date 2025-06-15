@@ -21,12 +21,6 @@ public class SecurityConfig {
         http
             .csrf(AbstractHttpConfigurer::disable)
             .authorizeHttpRequests(authorize -> {
-                        authorize.requestMatchers(
-                                "/release-manager/swagger-ui/**",
-                                "/release-manager/v3/api-docs/**",
-                                "/release-manager/api-docs.yaml",
-                                "/release-manager/auth/generate-token"
-                        ).permitAll();
                         authorize.anyRequest().authenticated();
                     }
             )

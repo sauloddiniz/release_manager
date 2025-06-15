@@ -36,6 +36,7 @@ public class CustomFilter extends OncePerRequestFilter {
         if (requestURI.startsWith("/release-manager/swagger-ui/")
                 || requestURI.startsWith("/release-manager/v3/api-docs")
                 || requestURI.equals("/release-manager/api-docs.yaml")
+                || requestURI.startsWith("/release-manager/actuator")
         ) {
             filterChain.doFilter(request, response);
             return;
